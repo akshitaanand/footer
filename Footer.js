@@ -8,11 +8,15 @@ import { MDBBtn } from "mdbreact";
 import { SocialMediaIconsReact } from "social-media-icons-react";
 import NewWindow from "react-new-window";
 import { Link, BrowserRouter, Route } from "react-router-dom";
-import terms from "./terms.html";
+import Privacy from "./privacy";
 
 class Footer extends Component {
   handleOnclick() {
     window.open();
+  }
+
+  showCurrentYear() {
+    return new Date().getFullYear();
   }
 
   render() {
@@ -155,8 +159,12 @@ class Footer extends Component {
                   style={{ color: "white", fontSize: "17px" }}
                   onClick={() =>
                     window
-                      .open("", "Terms and Conditions", "width=200,height=100")
-                      .document.write("<h1>Privacy Policy</h1>")
+                      .open(
+                        "/privacy",
+                        "_blank",
+                        "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400"
+                      )
+                      .document.write(<Privacy />)
                   }
                 >
                   {" "}
@@ -164,22 +172,17 @@ class Footer extends Component {
                 </td>
               </MDBBtn>
               <MDBBtn>
-                <td
+                <Link
+                  to={{ pathname: "/Terms" }}
                   style={{ color: "white", fontSize: "17px" }}
-                  onClick={() =>
-                    window
-                      .open("", "Terms and Conditions", "width=200,height=100")
-                      .document.write(
-                        "<h1>TERMS OF USE</h1> <p>Last updated: 2020-07-10 </p> <h3>1. Introduction</h3><p>Welcome to ProductHub LLP (“Company”, “we”, “our”, “us”)! These Terms of Service (“Terms”, “Terms of Service”) govern your use of our website located at producthub.in (together or individually “Service”) operated by ProductHub LLP. Our Privacy Policy also governs your use of our Service and explains how we collect, safeguard and disclose information that results from your use of our web pages. Your agreement with us includes these Terms and our Privacy Policy (“Agreements”). You acknowledge that you have read and understood Agreements, and agree to be bound by them. If you do not agree with (or cannot comply with) Agreements, then you may not use the Service, but please let us know by emailing at hello@producthub.in so we can try to find a solution. These Terms apply to all visitors, users and others who wish to access or use Service.</p>"
-                      )
-                  }
+                  target="_blank"
                 >
                   Terms and Conditions
-                </td>
+                </Link>
               </MDBBtn>
             </div>
           </MDBContainer>
-          <MDBContainer>Copyright @2020 ProductHub</MDBContainer>
+          Copyright @{this.showCurrentYear()} ProductHub
         </div>
       </MDBFooter>
     );
